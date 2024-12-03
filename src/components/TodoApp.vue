@@ -85,12 +85,17 @@ export default {
   },
   computed: {
     filteredTodos() {
-      if (this.filterStatus === "all") {
-        return this.todos;
+      let filtered = this.todos;
+
+      // ステータスでフィルタリング
+      if (this.filterStatus !== "all") {
+        filtered = filtered.filter(
+          (todo) => Number(todo.completed) === Number(this.filterStatus)
+        );
       }
-      return this.todos.filter(
-        (todo) => Number(todo.completed) === Number(this.filterStatus)
-      );
+
+      // 開始予定日の昇順でソート
+      return filtered.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
     },
   },
   methods: {
