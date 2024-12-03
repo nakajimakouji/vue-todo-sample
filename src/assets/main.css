@@ -1,18 +1,203 @@
 @import './base.css';
 
+/* 全体レイアウト */
 #app {
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
+  box-sizing: border-box;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+body {
+  background-color: #f8f9fa;
+  color: #333;  
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+  place-items: center;
+}
+
+/* ヘッダー */
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* メインコンテンツ */
+main {
+  flex: 1;
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* コンテンツ全体 */
+.todo-form {
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+/* 入力フォーム */
+.todo-field {
+  display: flex;
+  justify-content: flex-start;
+  width: 80%;
+  gap: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.date-fields {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.date-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-todo-btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-todo-btn:hover {
+  background-color: #0056b3;
+}
+
+.todo-header {
+  display: flex; /* 横並びに配置 */
+  align-items: center; /* 縦方向の位置を中央揃え */
+  justify-content: flex-start; /* 左揃え */
+  gap: 5rem; /* h2とラジオボタンの間のスペース */
+  margin-bottom: 1rem; /* 下に余白を追加 */
+}
+
+.todo-header h2 {
+  font-size: 32px;
+  margin-left: 6rem;
+}
+
+.filter-section {
+  display: flex; /* 横並びに配置 */
+  gap: 10px; /* ラベル間のスペース */
+}
+
+.filter-section label {
+  display: flex;
+  align-items: center; /* 縦方向の位置を中央揃え */
+  gap: 5px; /* ラジオボタンとテキストの間隔 */
+  cursor: pointer;
+}
+
+.todo-list-container {
+  width: 80%;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* リストヘッダー */
+.todo-list-header,
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* リストヘッダー */
+.todo-list-header {
+  font-weight: bold;
+}
+
+.todo-title-header {
+  flex: 3;
+  text-align: center;
+}
+
+.todo-title {
+  flex: 3;
+  text-align: left;
+}
+
+.todo-start-header,
+.todo-start-date,
+.todo-due-header,
+.todo-due-date,
+.todo-status-header,
+.todo-status {
+  flex: 1.5;
+  text-align: center;
+}
+
+.todo-action-header,
+.delete-todo-btn {
+  flex: 0.8;
+  text-align: center;
+}
+
+.status-select {
+  padding: 5px 4px;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+  border: none;
+  /* appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none; */
+}
+
+/* タスクが完了した場合のスタイル */
+.todo-item.completed .todo-title,
+.todo-item.completed .todo-start-date,
+.todo-item.completed .todo-due-date {
+  text-decoration: line-through; /* 横棒を引く */
+  color: #999; /* 色を薄くして視覚的に完了を示す */
+}
+
+
+.delete-todo-btn {
+  padding: 0.3rem 0;
+  font-size: 0.9rem;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-todo-btn:hover {
+  background-color: #a71d2a;
 }
 
 @media (hover: hover) {
@@ -21,15 +206,44 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
+@media (max-width: 1024px) {
   #app {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+  #app {
+    padding: 1rem;
+  }
+
+  header {
+    font-size: 1.8rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  header {
+    font-size: 1.5rem;
+  }
+
+  .todo-item {
+    flex-wrap: wrap;
+  }
+
+  .todo-id,
+  .todo-title,
+  .todo-status,
+  .delete-btn {
+    margin-bottom: 0.5rem;
   }
 }
