@@ -54,9 +54,7 @@
       </div>
       <ul class="todo-list">
         <li v-for="todo in filteredTodos" :key="todo.id" :class="{ completed: todo.completed === 2 }" class="todo-item">
-          <router-link :to="{ name: 'EditTodo', params: { id: todo.id } }" class="todo-title">
-            {{ todo.title }}
-          </router-link>
+          <span class="todo-title">{{ todo.title }}</span>
           <span class="todo-start-date">{{ todo.startDate }}</span>
           <span class="todo-due-date">{{ todo.dueDate }}</span>
           <span class="todo-status">
