@@ -53,8 +53,10 @@
         <span class="todo-action-header"></span>
       </div>
       <ul class="todo-list">
-        <li v-for="todo in filteredTodos" :key="todo.id" :class="{ completed: todo.completed === 2 }" class="todo-item">
-          <span class="todo-title">{{ todo.title }}</span>
+        <li v-for="todo in filteredTodos" :key="todo.id" class="todo-item">
+          <router-link :to="{ name: 'EditTodo', params: { id: todo.id } }" class="todo-title">
+            {{ todo.title }}
+          </router-link>
           <span class="todo-start-date">{{ todo.startDate }}</span>
           <span class="todo-due-date">{{ todo.dueDate }}</span>
           <span class="todo-status">
@@ -72,7 +74,11 @@
 </template>
 
 <script>
+import '@/styles/TodoList.css';
+
 export default {
+  name: 'TodoList',
+
   data() {
     return {
       newTodo: "",
@@ -105,6 +111,12 @@ export default {
         return;
       }
 
+      // 日付の前後をチェック
+      if (new Date(this.newStartDate) > new Date(this.newDueDate)) {
+        alert("開始予定日と期限の日付が前後しています");
+        return;
+      }
+
       this.todos.push({
         id: this.nextId++,
         title: this.newTodo,
@@ -120,9 +132,6 @@ export default {
     },
     removeTodo(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
-      this.todos.forEach((todo, index) => {
-        todo.id = index + 1;
-      });
       this.saveTodos();
     },
     saveTodos() {
@@ -133,7 +142,8 @@ export default {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
       this.todos = JSON.parse(savedTodos);
-      this.nextId = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
+    // 削除後でも一意な ID を確保
+    this.nextId = Math.max(...this.todos.map((todo) => todo.id), 0) + 1;
     }
   },
 };
