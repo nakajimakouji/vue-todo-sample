@@ -1,0 +1,61 @@
+.edit-todo {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.edit-todo h2 {
+  font-size: 32px;
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+}
+
+/* フォーム全体のスタイル */
+.edit-todo-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 各項目間のスペース */
+}
+
+/* ラベルと入力フィールドを縦並びに配置 */
+.edit-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 入力フィールドとセレクトボックスのスタイル */
+.edit-todo input[type="text"],
+.edit-todo input[type="date"],
+.edit-todo select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/* ボタン全体を中央揃え */
+.button-container {
+  display: flex;
+  justify-content: center; /* 横方向中央揃え */
+}
+
+.update-btn {
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+}
+
+.update-btn,
+.cancel-btn {
+  width: 20%;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
